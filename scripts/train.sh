@@ -1,0 +1,11 @@
+python ./code/main.py \
+    --cuda='0' \
+    --task='train' \
+    --num_step=20 \
+    --n_epochs=400 \
+    --batch_size=4 \
+    --rot_angle=4 \
+    --data_type='single_scan' \
+    --data_dir='./dataset' \
+    --result_dir='./outputs' \
+    --note='example'

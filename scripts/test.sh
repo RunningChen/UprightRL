@@ -1,0 +1,12 @@
+python ./code/main.py \
+    --cuda='0' \
+    --task='test' \
+    --num_step=20 \
+    --n_epochs=1 \
+    --batch_size=4 \
+    --rot_angle=4 \
+    --data_type='single_scan' \
+    --data_dir='./dataset' \
+    --result_dir='./outputs' \
+    --note='example' \
+    --pretrain_dir='./pretrain/4_single_scan/'
