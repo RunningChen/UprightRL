@@ -563,24 +563,32 @@ def main(args):
     setup_seed(666)
 
     if args.data_type == 'complete':
-        DATA_PATH = "%s/shapenet_new/" % (args.data_dir)
-        CATES = ['02691156', '02933112', '02958343', '03001627','03636649', '04256520', '04379243', '04530566']
+        DATA_PATH = "%s/shapenet_complete/" % (args.data_dir)
+        # CATES = ['02691156', '02933112', '02958343', '03001627','03636649', '04256520', '04379243', '04530566']
+        CATES = ['Plane', 'Cabinet', 'Car', 'Chair', 'Lamp', 'Couch', 'Table', 'Watercraft']
+        DataLoader = DataLoader_Transform
+
     elif args.data_type == 'partial':
-        DATA_PATH = "%s/shapenet_partial_new/" % (args.data_dir)
-        CATES = ['02691156', '02933112', '02958343', '03001627','03636649', '04256520', '04379243', '04530566']
+        DATA_PATH = "%s/shapenet_partial/" % (args.data_dir)
+        CATES = ['Plane', 'Cabinet', 'Car', 'Chair', 'Lamp', 'Couch', 'Table', 'Watercraft']
+        DataLoader = DataLoader_Transform
+
     elif args.data_type == 'single_scan':
         DATA_PATH = "%s/shapenet_single_scan/" % (args.data_dir)
-        CATES = ['02691156', '02933112', '02958343', '03001627','03636649', '04256520', '04379243', '04530566']
-        # CATES = ['03001627', ]
-        # CATES = ['04256520', ]
+        CATES = ['Plane', 'Cabinet', 'Car', 'Chair', 'Lamp', 'Couch', 'Table', 'Watercraft']
+        DataLoader = DataLoader_Transform_Single_Scan
 
     elif args.data_type == 'uprl':
         DATA_PATH = "%s/upright16_data/" % (args.data_dir)
         CATES = ['airplane','bathtub', 'bicycle', 'car', 'chair', 'cup', 'dog', 'fruit','person','table']
+        DataLoader = DataLoader_Transform_Upright
+
     elif args.data_type == 'tta':
         DATA_PATH = "%s/upright16_data/testTTA/" % (args.data_dir)
         CATES = ['airplane','bathtub', 'bicycle', 'car', 'chair', 'cup', 'dog', 'fruit','person','table']
+        DataLoader = DataLoader_Transform_TTA
 
+    # CATES = ['Plane']
     
     '''CREATE DIR'''
     timestr = str(datetime.datetime.now().strftime('%Y-%m-%d-%H-%M'))
@@ -608,14 +616,6 @@ def main(args):
     args.device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
     '''DATA LOADING'''
-    if 'single_scan' in DATA_PATH:
-        DataLoader = DataLoader_Transform_Single_Scan
-    elif 'TTA' in DATA_PATH:
-        DataLoader = DataLoader_Transform_TTA
-    elif 'upright' in DATA_PATH:
-        DataLoader = DataLoader_Transform_Upright
-    else:
-        DataLoader = DataLoader_Transform
     
     if args.task == 'train':
         TRAIN_DATASET = DataLoader(root=DATA_PATH, npoint=args.num_point, split='train', category=CATES)

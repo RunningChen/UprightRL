@@ -56,8 +56,10 @@ def preset_scene(category):
 		'person': 0.6,
 		'table': 0.6
 	}
-	bpy.context.scene.objects['Z-Axis'].scale.z = z_axis_length_table[category]
-	bpy.context.scene.objects['Arrow'].location.z = z_axis_length_table[category]
+	# bpy.context.scene.objects['Z-Axis'].scale.z = z_axis_length_table[category]
+	# bpy.context.scene.objects['Arrow'].location.z = z_axis_length_table[category]
+	bpy.context.scene.objects['Z-Axis'].scale.z = 0.6
+	bpy.context.scene.objects['Arrow'].location.z = 0.6
 
 # Clear intermediate stuff
 def reset(pcm=None, clear_instancers=False, clear_database=False):
@@ -85,23 +87,36 @@ def reset(pcm=None, clear_instancers=False, clear_database=False):
 
 if __name__ == "__main__":
 	
-	data_type = 'single' # complete / partial / single_scan / uprl ... just a folder name you like
-	image_dir = os.path.join(ROOT_DIR, 'images_' + data_type)
 	
-	render_type = 'out'  # gt: means input points   #out means output points
+	render_type = 'gt'  # gt: means input points   #out means output points
+	data_type = 'single_scan' # complete / partial / single_scan / uprl ... just a folder name you like
+	image_dir = os.path.join(ROOT_DIR, 'images_' + data_type)
 
 	# the result h5 file
-	h5_path = '/home/ubuntu/ws/upright/main/output/test/4_single_scan_l2__2021-07-07-18-08_3/test.h5'
+	# h5_path = 'F:/Project/UprightRL/outputs/test/4_single_scan_l2_example_2021-08-27-12-32/test.h5'
+	# h5_path = 'F:/Project/UprightRL/outputs/test/4_complete_l2_example_2021-08-27-12-43/test.h5'
+	# h5_path = 'F:/Project/UprightRL/outputs/test/4_partial_l2_example_2021-08-27-13-08/test.h5'
+	# h5_path = 'F:/Project/UprightRL/outputs/test/4_uprl_l2_example_2021-08-27-13-17/test.h5'
+	# h5_path = 'F:/Project/UprightRL/outputs/test/4_partial_l2_example_2021-10-04-23-30/test.h5'
+	# h5_path = 'F:/Project/UprightRL/outputs/test/4_complete_l2_example_2021-10-04-23-29/test.h5'
+	h5_path = 'F:/Project/UprightRL/outputs/test/4_single_scan_l2_example_2021-10-05-00-38/test.h5'
 
 	# the categories you want to render
-	cats = ['03001627'] #,'02933112','02958343','03001627','03636649','04256520','04379243','04530566']
+	cats = ['04379243'] #,'02933112','02958343','03001627','03636649','04256520','04379243','04530566']
+	cats = ['02691156'] 
+	cats = ['02691156'] # 飞机
+	# cats = ['03001627'] 
 	# cate = '02691156'
 	# cats = ['airplane','bathtub', 'car', 'chair', 'cup', 'dog', 'fruit','person','table', 'bicycle']
 	# cats = ['chair']#['airplane','bathtub','bicycle','car','chair']#,['cup','dog','fruit','person','table']
+	# cats = ['bicycle']
+	cats = ['Plane']
 
 	save_folder_name = "angle_4"
-	render_num = 5
+	render_num = 30
 	start_index = 0
+
+	batch_size = 4
 
 	# bpy.context.scene.cycles.device = 'GPU'
 	for cate in cats:
@@ -117,11 +132,12 @@ if __name__ == "__main__":
 				break
 
 			for k in range(start_index, start_index + render_num):
-				ii = k % 8
-				i = int(k / 8)
+				ii = k % batch_size
+				i = int(k / batch_size)
 				
-				image_path = os.path.join(image_dir, cate + '_' + render_type, save_folder_name, str(i*8+ii)+'.png')
-				os.makedirs( os.path.join(image_dir, cate + '_' + render_type, save_folder_name), exist_ok=True )
+				image_path = os.path.join(image_dir, cate + '_' + render_type, save_folder_name, str(i*batch_size+ii)+'.png')
+				save_folder = os.path.join(image_dir, cate + '_' + render_type, save_folder_name)
+				os.makedirs( save_folder, exist_ok=True )
 				
 				if render_type == 'out':
 					sphere_color = 'Orange'#'Orang'
@@ -135,6 +151,9 @@ if __name__ == "__main__":
 				pcm = PointCloudMaker()
 				
 				pcd = f[render_type+'_pts'][i,ii,:,:]
+				
+				np.save( os.path.join(save_folder, str(i*batch_size+ii)+'.npy'), pcd )
+				
 				reset(clear_instancers=True)
 
 				# Create spheres from point clouds

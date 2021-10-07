@@ -1,0 +1,4 @@
+outputs/
+dataset/
+render/images_*
+*__pycache__/

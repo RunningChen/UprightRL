@@ -29,10 +29,10 @@ def random_matrix():
     
     return random_matrix_10
 
-split_list = {'02691156':400,'02933112':150,'02958343':300,'03001627':600,'03636649':200,'04256520':300,'04379243':250,'04530566':150}
+split_list = {'Plane':400,'Cabinet':150,'Car':300,'Chair':600,'Lamp':200,'Couch':300,'Table':250,'Watercraft':150}
 
 class DataLoader_Transform_Single_Scan(Dataset):
-	def __init__(self, root, npoint=2048, split='train', category=['02691156'], assist_input=False):
+	def __init__(self, root, npoint=2048, split='train', category=['Plane'], assist_input=False):
 		self.npoints = npoint
 		self.split = split
 		self.assist_input = assist_input
@@ -100,7 +100,7 @@ class DataLoader_Transform_Single_Scan(Dataset):
 		return self.ptss_name[index]#.decode('utf-8')
 
 class DataLoader_Transform(Dataset):
-	def __init__(self, root, npoint=2048, split='train', isrotate=True, rotate_azimuth=False, category=['02691156'], assist_input=False):
+	def __init__(self, root, npoint=2048, split='train', isrotate=True, rotate_azimuth=False, category=['Plane'], assist_input=False):
 		self.npoints = npoint
 		self.split = split
 		self.isrotate = isrotate
@@ -272,7 +272,7 @@ class DataLoader_Transform_Upright2(Dataset):
 		return self.ptss_name[index]#.decode('utf-8')
 
 class DataLoader_Transform_Upright(Dataset):
-    def __init__(self, root, npoint=2048, split='train', isrotate=True, rotate_azimuth=False, category=['02691156'], small_set=False, assist_input=False,test_aug = False):
+    def __init__(self, root, npoint=2048, split='train', isrotate=True, rotate_azimuth=False, category=['airplane'], small_set=False, assist_input=False,test_aug = False):
         self.npoints = npoint
         self.split = split
         self.isrotate = isrotate
@@ -342,7 +342,7 @@ class DataLoader_Transform_Upright(Dataset):
         return self.ptss_name[index]  # .decode('utf-8')
 
 class DataLoader_Transform_TTA(Dataset):
-	def __init__(self, root, npoint=2048, split='train',  category=['02691156'], assist_input=False):
+	def __init__(self, root, npoint=2048, split='train',  category=['airplane'], assist_input=False):
 		self.npoints = npoint
 		self.split = split 
 		self.assist_input = assist_input

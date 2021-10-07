@@ -5,8 +5,8 @@ python ./code/main.py \
     --n_epochs=1 \
     --batch_size=4 \
     --rot_angle=4 \
-    --data_type='single_scan' \
+    --data_type='complete' \
     --data_dir='./dataset' \
     --result_dir='./outputs' \
     --note='example' \
-    --pretrain_dir='./pretrain/4_single_scan/'
+    --pretrain_dir='./pretrain/4_complete/'

@@ -18,7 +18,9 @@ Check `requirements.txt` for more details.
 
 ## Usage
 
-All codes are tested on Ubuntu 18.04 and Windows 10.
+All codes are tested on Ubuntu 18.04 and Windows 10. 
+
+Before you run the following scripts, please prepare the dataset you required (introduced below)
 ### Training
 ```
 ./scripts/train.sh
@@ -52,7 +54,7 @@ Critic FC | 128 | 1 |
 
 * **code/**: Main code folder.
 * **render/**: Render code.
-* **dataset/**: Dataset folder, *[release soon]*.
+* **dataset/**: Dataset folder, you can download our trianing/testing dataset from https://vcc.tech/xxx.
 * **pretrain/**: Model we trained before.
 * **scripts/**: Some scripts to train/test network.
 
@@ -86,7 +88,7 @@ Critic FC | 128 | 1 |
         When the main.py is running, it will create a folder under to store the result, and the note string will be a part of the folder's name
 
     --pretrain_dir: string, the location of pre-trained network model
-        If the path for a model of network is "./model/best.pth", then the checkpoint should be "./model/"
+        If the path of a network model is "./model/best.pth", then the pretrain_dir should be "./model/"
     
 
 Example:
@@ -105,6 +107,8 @@ Example:
 
 This command means you want to train the network in **400** epochs, batch size is **4**, using the **single_scan** dataset in **./dataset** folder. The max steps num is **20** steps, each rotation angle step is **4** degree.
 
+In our code, the GPU memory is mainly affected by the `batch_size` and the `num_step`, we test on an NVIDIA TITAN Xp, it takes about 7 GB to execute the `train.sh`.
+
 Then it will generate a folder unber **./outputs** folder to store the training or testing result.
 The folder structure of `./outputs` may looks like this:
 
@@ -116,16 +120,24 @@ The folder structure of `./outputs` may looks like this:
             ├── plots/           <--- some reward / loss curve
             └── xxx.h5           <--- the test/val result
 
+## Dataset
 The `dataset/` folder contain the data, the folder structure of `dataset` looks like this:
 
     dataset/
-    ├── shapenet_new/
-    ├── shapenet_partial_new/
+    ├── shapenet_complete/
+    |   └── xxxxxx.h5
+    ├── shapenet_partial/
     ├── shapenet_single_scan/
     └── upright16_data/
         └── testTTA/
 
-Under these folders, we have many kinds for dataset, `shapenet_new` is the complete dataset, `shapenet_partial_new` is the partial dataset, `shapenet_single_new` is the single scan dataset, `upright16_data` is the dataset from [LZL16](https://github.com/zishun/UprightOrientation).
+`shapenet_complete` is the complete dataset, download link: https:///xxx
+
+`shapenet_partial` is the partial dataset, download link: https:///xxx
+
+`shapenet_single_scan` is the single scan dataset, download link: https:///xxx
+
+`upright16_data` is the dataset from [LZL16](https://github.com/zishun/UprightOrientation).
 
 <!-- ## Citation
 Please cite the paper in your publications if it helps your research:
