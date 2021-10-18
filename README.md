@@ -54,7 +54,7 @@ Critic FC | 128 | 1 |
 
 * **code/**: Main code folder.
 * **render/**: Render code.
-* **dataset/**: Dataset folder, you can download our trianing/testing dataset from https://vcc.tech/xxx.
+* **dataset/**: Dataset folder, you can download our trianing/testing dataset from [google drive](https://drive.google.com/drive/folders/1QbMgPpWqxfrqKvdx8-i_ZRFbElab7rCe?usp=sharing).
 * **pretrain/**: Model we trained before.
 * **scripts/**: Some scripts to train/test network.
 
