@@ -9,11 +9,11 @@ i.e. we teach a machine (agent) to orientate 3D shapes step by step to upright g
 methods, we take this problem as a sequential decision-making process instead of a strong supervised learning problem. To
 achieve this, we propose UprightRL, a deep network architecture designed for upright orientation estimation.
 
-<!-- For more details and materials, please refer to our [project page](xxx). -->
+For more details and materials, please refer to our [project page](https://vcc.tech/research/2021/UprightRL).
 
 
 ## Dependencies
-Check `requirements.txt` for more details.
+Check [`requirements.txt`](./requirements.txt) for more details.
 
 
 ## Usage
@@ -29,7 +29,7 @@ Before you run the following scripts, please prepare the dataset you required (i
 ```
 ./scripts/test.sh
 ```
-### Render ( check render folder for detial )
+### Render ( check [render folder](./render/README.md) for detial )
 ```
 cd render/
 blender -b render_demo.blend -P render_single_pcd.py
@@ -131,19 +131,26 @@ The `dataset/` folder contain the data, the folder structure of `dataset` looks 
     └── upright16_data/
         └── testTTA/
 
-`shapenet_complete` is the complete dataset, download link: https:///xxx
+`shapenet_complete` is the complete dataset, download from [google drive](https://drive.google.com/file/d/1loWWDxAyAKUZ6Q8KWys9SYYxwD1GR2Ld/view?usp=sharing)
 
-`shapenet_partial` is the partial dataset, download link: https:///xxx
+`shapenet_partial` is the partial dataset, download for [google drive](https://drive.google.com/file/d/1FKsL9gS32wgvHROav7jR0QXchKZudKsw/view?usp=sharing)
 
-`shapenet_single_scan` is the single scan dataset, download link: https:///xxx
+`shapenet_single_scan` is the single scan dataset, download from [google drive](https://drive.google.com/file/d/1E06efZAo4y0vUFJvpZbTWRisyvHke8Ny/view?usp=sharing)
 
 `upright16_data` is the dataset from [LZL16](https://github.com/zishun/UprightOrientation).
 
-<!-- ## Citation
+## Citation
 Please cite the paper in your publications if it helps your research:
 ```
-coming soon
-``` -->
+@article{UPRL21,
+title = {Learning Elastic Constitutive Material and Damping Models},
+author = {Luanmin Chen and Juzhan Xu and Chuan Wang and Haibin Huang and Hui Huang and Ruizhen Hu},
+journal = {Computer Graphics Forum (Proceedings of Pacific Graphics 2021)},
+volume = {40},
+number = {7},
+year = {2021},
+}
+```
 
 ## License
 Our code is released under MIT License. See LICENSE file for details.
