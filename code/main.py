@@ -708,7 +708,7 @@ def main(args):
             log_string(logger,'\nEpoch %d (%d/%s):' % (global_epoch + 1, epoch + 1, args.n_epochs))
             scheduler.step()
             
-            train(args, 'train', trainDataLoader, model, optimizer, epoch, summary_writer)
+            train(args, 'train', trainDataLoader, model, optimizer, epoch, logger, summary_writer)
             end = time.time()
             print( "--------- %.3fs ---------" % (end-start) )
 
